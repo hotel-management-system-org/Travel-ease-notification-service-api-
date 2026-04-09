@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<body style="margin:0; padding:0; font-family: Arial, sans-serif; background:#f4f6f8;">
+
+<table align="center" width="600" cellpadding="0" cellspacing="0"
+       style="background:#ffffff; margin-top:30px; border-radius:8px; overflow:hidden;">
+
+    <tr>
+        <td style="background:#f59e0b; padding:20px; text-align:center; color:white;">
+            <h2 style="margin:0;">Booking Created Successfully</h2>
+        </td>
+    </tr>
+
+    <tr>
+        <td style="padding:25px;">
+            <p>Hello <strong>{{user_name}}</strong>,</p>
+
+            <p>Your booking has been successfully created and is currently <strong>pending confirmation</strong>.</p>
+
+            <table width="100%" cellpadding="8" cellspacing="0" style="margin-top:15px;">
+                <tr><td><strong>Booking ID</strong></td><td>{{booking_id}}</td></tr>
+                <tr><td><strong>Hotel</strong></td><td>{{hotel_name}}</td></tr>
+                <tr><td><strong>Room Number</strong></td><td>{{room_number}}</td></tr>
+                <tr><td><strong>Check-in</strong></td><td>{{check_in_date}}</td></tr>
+                <tr><td><strong>Check-out</strong></td><td>{{check_out_date}}</td></tr>
+                <tr><td><strong>Total Price</strong></td><td>LKR {{total_price}}</td></tr>
+                <tr><td><strong>Status</strong></td><td>{{status}}</td></tr>
+            </table>
+
+            <div style="margin-top:20px; padding:15px; background:#fff7e6; border-radius:6px;">
+                ⏳ We are processing your booking. You will receive another email once it is confirmed.
+            </div>
+
+            <p style="margin-top:20px;">Thank you for choosing TravelEase!</p>
+        </td>
+    </tr>
+
+</table>
+</body>
+</html>
