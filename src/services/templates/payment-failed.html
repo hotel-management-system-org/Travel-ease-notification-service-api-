@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<body style="margin:0; padding:0; font-family: Arial, sans-serif; background:#f4f6f8;">
+
+<table align="center" width="600" cellpadding="0" cellspacing="0"
+       style="background:#ffffff; margin-top:30px; border-radius:8px; overflow:hidden;">
+
+    <!-- Header -->
+    <tr>
+        <td style="background:#dc2626; padding:20px; text-align:center; color:white;">
+            <h2 style="margin:0;">Payment Failed ❌</h2>
+        </td>
+    </tr>
+
+    <!-- Content -->
+    <tr>
+        <td style="padding:25px;">
+            <p>Hello <strong>${user_name}</strong>,</p>
+
+            <p>Unfortunately, your recent payment attempt was unsuccessful.</p>
+
+            <table width="100%" cellpadding="8" cellspacing="0" style="margin-top:15px;">
+                <tr>
+                    <td><strong>Payment ID</strong></td>
+                    <td>${payment_id}</td>
+                </tr>
+                <tr>
+                    <td><strong>Booking ID</strong></td>
+                    <td>${booking_id}</td>
+                </tr>
+                <tr>
+                    <td><strong>Attempted Amount</strong></td>
+                    <td>${amount}</td>
+                </tr>
+                <tr>
+                    <td><strong>Failure Reason</strong></td>
+                    <td>${failure_reason}</td>
+                </tr>
+            </table>
+
+            <div style="margin-top:20px; padding:15px; background:#fde8e8; border-radius:6px;">
+                ⚠ Please try again using a different payment method or contact your bank.
+            </div>
+
+            <p style="margin-top:20px;">
+                If the issue persists, contact our support team for assistance.
+            </p>
+
+            <p>
+                Regards,<br>
+                <strong>TravelEase Team</strong>
+            </p>
+        </td>
+    </tr>
+
+    <!-- Footer -->
+    <tr>
+        <td style="background:#f1f5f9; padding:15px; text-align:center; font-size:12px; color:#777;">
+            © 2026 TravelEase. All rights reserved.
+        </td>
+    </tr>
+
+</table>
+</body>
+</html>
