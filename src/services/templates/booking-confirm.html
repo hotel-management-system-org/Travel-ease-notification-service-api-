@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<body style="margin:0; padding:0; font-family: Arial, sans-serif; background:#f4f6f8;">
+
+<table align="center" width="600" cellpadding="0" cellspacing="0"
+       style="background:#ffffff; margin-top:30px; border-radius:8px; overflow:hidden;">
+
+    <tr>
+        <td style="background:#16a34a; padding:20px; text-align:center; color:white;">
+            <h2 style="margin:0;">Booking Confirmed 🎉</h2>
+        </td>
+    </tr>
+
+    <tr>
+        <td style="padding:25px;">
+            <p>Hello <strong>{{user_name}}</strong>,</p>
+
+            <p>Great news! Your booking has been <strong style="color:green;">confirmed</strong>.</p>
+
+            <table width="100%" cellpadding="8" cellspacing="0" style="margin-top:15px;">
+                <tr><td><strong>Booking ID</strong></td><td>{{booking_id}}</td></tr>
+                <tr><td><strong>Hotel</strong></td><td>{{hotel_name}}</td></tr>
+                <tr><td><strong>Confirmation Code</strong></td><td>{{confirmation_code}}</td></tr>
+                <tr><td><strong>Check-in</strong></td><td>{{check_in_date}}</td></tr>
+                <tr><td><strong>Check-out</strong></td><td>{{check_out_date}}</td></tr>
+            </table>
+
+            <div style="margin-top:20px; padding:15px; background:#e6f9ed; border-radius:6px;">
+                ✅ Please keep your confirmation code safe and present it at check-in.
+            </div>
+
+            <p style="margin-top:20px;">We look forward to hosting you!</p>
+        </td>
+    </tr>
+
+</table>
+</body>
+</html>
