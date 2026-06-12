@@ -17,15 +17,14 @@ export class PaymentConsumer{
        const raw = message.value?.toString();
 
        if(!raw){
-           logger.error('❌ Empty Kafka message');
+           logger.error('Empty Kafka message');
            return;
        }
 
        const kafkaEvent : PaymentSuccessEvent = JSON.parse(raw);
 
-       // ✅ DEBUG: Log the ACTUAL Kafka event structure
-       console.log("🔍 [UserConsumer] Raw Kafka Event:", JSON.stringify(kafkaEvent, null, 2));
-       console.log("🔍 [UserConsumer] eventType value:", kafkaEvent.event_type);
+       console.log("[UserConsumer] Raw Kafka Event:", JSON.stringify(kafkaEvent, null, 2));
+       console.log("[UserConsumer] eventType value:", kafkaEvent.event_type);
 
        const event:PaymentSuccessEvent = {
            event_type:kafkaEvent.event_type || "PAYMENT_SUCCESS",
@@ -44,7 +43,7 @@ export class PaymentConsumer{
            timestamp: "",
            version: ""
        }
-       console.log("📤 [UserConsumer] Mapped Event:", JSON.stringify(event, null, 2));
+       console.log("[UserConsumer] Mapped Event:", JSON.stringify(event, null, 2));
 
        await this.handler.handlePaymentSuccess(event);
 
@@ -58,15 +57,14 @@ export class PaymentConsumer{
         const raw = message.value?.toString();
 
         if(!raw){
-            logger.error('❌ Empty Kafka message');
+            logger.error('Empty Kafka message');
             return;
         }
 
         const kafkaEvent : PaymentFailedEvent = JSON.parse(raw);
 
-        // ✅ DEBUG: Log the ACTUAL Kafka event structure
-        console.log("🔍 [UserConsumer] Raw Kafka Event:", JSON.stringify(kafkaEvent, null, 2));
-        console.log("🔍 [UserConsumer] eventType value:", kafkaEvent.event_type);
+        console.log("[UserConsumer] Raw Kafka Event:", JSON.stringify(kafkaEvent, null, 2));
+        console.log("[UserConsumer] eventType value:", kafkaEvent.event_type);
 
         const event:PaymentFailedEvent = {
             event_type:kafkaEvent.event_type || "PAYMENT_FAILED",
@@ -83,7 +81,7 @@ export class PaymentConsumer{
             timestamp: "",
             version: ""
         }
-        console.log("📤 [UserConsumer] Mapped Event:", JSON.stringify(event, null, 2));
+        console.log("[UserConsumer] Mapped Event:", JSON.stringify(event, null, 2));
 
         await this.handler.handlePaymentFailed(event);
 
