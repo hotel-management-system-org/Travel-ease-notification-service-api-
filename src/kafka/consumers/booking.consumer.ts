@@ -22,21 +22,15 @@ export class BookingConsumer{
         const raw = message.value?.toString();
 
         if(!raw){
-            logger.error('❌ Empty Kafka message');
+            logger.error('Empty Kafka message');
             return;
         }
 
         const kafkaEvent : BookingCreatedEvent = JSON.parse(raw);
 
-        // ✅ DEBUG: Log the ACTUAL Kafka event structure
         console.log("🔍 [UserConsumer] Raw Kafka Event:", JSON.stringify(kafkaEvent, null, 2));
         console.log("🔍 [UserConsumer] eventType value:", kafkaEvent.event_type);
 
-
-        /* if(!kafkaEvent.data?.user_id || kafkaEvent.data?.email){
-             logger.error('❌ Invalid USER_REGISTERED payload', kafkaEvent);
-             return; // DLQ
-         }*/
 
         const event: BookingCreatedEvent = {
             event_type: kafkaEvent.event_type || "BOOKING_CREATED",
@@ -59,7 +53,6 @@ export class BookingConsumer{
             version: ""
         }
 
-        // ✅ DEBUG: Log the mapped event
         console.log("📤 [UserConsumer] Mapped Event:", JSON.stringify(event, null, 2));
 
         await this.handler.handleBookingCreated(event);
@@ -73,21 +66,15 @@ export class BookingConsumer{
         const raw = message.value?.toString();
 
         if(!raw){
-            logger.error('❌ Empty Kafka message');
+            logger.error('Empty Kafka message');
             return;
         }
 
         const kafkaEvent : BookingConfirmedEvent = JSON.parse(raw);
 
-        // ✅ DEBUG: Log the ACTUAL Kafka event structure
-        console.log("🔍 [UserConsumer] Raw Kafka Event:", JSON.stringify(kafkaEvent, null, 2));
-        console.log("🔍 [UserConsumer] eventType value:", kafkaEvent.event_type);
+        console.log("[UserConsumer] Raw Kafka Event:", JSON.stringify(kafkaEvent, null, 2));
+        console.log("[UserConsumer] eventType value:", kafkaEvent.event_type);
 
-
-        /* if(!kafkaEvent.data?.user_id || kafkaEvent.data?.email){
-             logger.error('❌ Invalid USER_REGISTERED payload', kafkaEvent);
-             return; // DLQ
-         }*/
 
         const event: BookingConfirmedEvent = {
             event_type: kafkaEvent.event_type || "BOOKING_CONFIRMED",
@@ -106,8 +93,7 @@ export class BookingConsumer{
             version: ""
         }
 
-        // ✅ DEBUG: Log the mapped event
-        console.log("📤 [UserConsumer] Mapped Event:", JSON.stringify(event, null, 2));
+        console.log("[UserConsumer] Mapped Event:", JSON.stringify(event, null, 2));
 
         await this.handler.handleBookingConfirmed(event);
 
@@ -121,21 +107,15 @@ export class BookingConsumer{
         const raw = message.value?.toString();
 
         if(!raw){
-            logger.error('❌ Empty Kafka message');
+            logger.error('Empty Kafka message');
             return;
         }
 
         const kafkaEvent : BookingCancelledEvent = JSON.parse(raw);
 
-        // ✅ DEBUG: Log the ACTUAL Kafka event structure
-        console.log("🔍 [UserConsumer] Raw Kafka Event:", JSON.stringify(kafkaEvent, null, 2));
-        console.log("🔍 [UserConsumer] eventType value:", kafkaEvent.event_type);
+        console.log("[UserConsumer] Raw Kafka Event:", JSON.stringify(kafkaEvent, null, 2));
+        console.log("[UserConsumer] eventType value:", kafkaEvent.event_type);
 
-
-        /* if(!kafkaEvent.data?.user_id || kafkaEvent.data?.email){
-             logger.error('❌ Invalid USER_REGISTERED payload', kafkaEvent);
-             return; // DLQ
-         }*/
 
         const event: BookingCancelledEvent = {
             event_type: kafkaEvent.event_type || "BOOKING_CANCELLED",
@@ -153,8 +133,7 @@ export class BookingConsumer{
             version: ""
         }
 
-        // ✅ DEBUG: Log the mapped event
-        console.log("📤 [UserConsumer] Mapped Event:", JSON.stringify(event, null, 2));
+        console.log("[UserConsumer] Mapped Event:", JSON.stringify(event, null, 2));
 
         await this.handler.handleBookingCancelled(event);
 
