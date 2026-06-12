@@ -24,7 +24,7 @@ export class DatabaseConfig {
                 socketTimeoutMS: 45000,
             });
 
-            logger.info('✅ MongoDB Connected Successfully');
+            logger.info('MongoDB Connected Successfully');
 
             mongoose.connection.on('error', (error) => {
                 logger.error('MongoDB Connection Error:', error);
@@ -35,7 +35,7 @@ export class DatabaseConfig {
             });
 
         } catch (error) {
-            logger.error('❌ MongoDB Connection Failed:', error);
+            logger.error('MongoDB Connection Failed:', error);
             process.exit(1);
         }
     }
