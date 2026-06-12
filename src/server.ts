@@ -25,7 +25,6 @@ async function startServer() {
         ];
         await kafkaClient.subscribe(topics);
 
-        // 4. Initialize consumers
 /*
         const paymentConsumer = new PaymentConsumer();
 */
@@ -68,8 +67,8 @@ async function startServer() {
 
         const app = createApp();
         app.listen(AppConfig.port, () => {
-            logger.info(`🚀 Notification Service is running on port ${AppConfig.port}`);
-            logger.info(`📡 Kafka Consumer is ACTIVE and listening...`);
+            logger.info(`Notification Service is running on port ${AppConfig.port}`);
+            logger.info(`Kafka Consumer is ACTIVE and listening...`);
         });
 
         process.on('SIGTERM', async () => {
