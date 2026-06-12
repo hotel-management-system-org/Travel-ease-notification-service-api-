@@ -23,7 +23,7 @@ export class PaymentHandler{
                 message:`Dear ${event.data.user_name}, your payment of ${event.data.amount} ${event.data.currency} was successfully.`,
                 metadata:event.data,
             });
-            logger.info(`✅ Payment success notification sent for: ${event.data.payment_id}`);
+            logger.info(`Payment success notification sent for: ${event.data.payment_id}`);
 
 
         }catch(error){
@@ -46,7 +46,7 @@ export class PaymentHandler{
                 message:`Dear ${event.data.user_name}, your payment of ${event.data.amount} was failed!`,
                 metadata:event.data,
             });
-            logger.info(`✅ Payment success notification sent for: ${event.data.payment_id}`);
+            logger.info(`Payment success notification sent for: ${event.data.payment_id}`);
 
 
         }catch(error){
