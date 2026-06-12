@@ -27,7 +27,7 @@ export class BookingHandler{
                 metadata:event.data
 
             });
-            logger.info(`✅ Booking created notification sent for: ${event.data.booking_id}`);
+            logger.info(`Booking created notification sent for: ${event.data.booking_id}`);
         }catch(error){
             logger.error('Error handling booking-created event:', error);
             throw error;
@@ -48,7 +48,7 @@ export class BookingHandler{
                 metadata:event.data
             });
 
-            logger.info(`✅ Booking confirmed notification sent for: ${event.data.booking_id}`);
+            logger.info(`Booking confirmed notification sent for: ${event.data.booking_id}`);
         } catch (error) {
             logger.error('Error handling booking-confirmed event:', error);
             throw error;
@@ -69,7 +69,7 @@ export class BookingHandler{
                 metadata:event.data
             });
 
-            logger.info(`✅ Booking cancelled notification sent for: ${event.data.booking_id}`);
+            logger.info(`Booking cancelled notification sent for: ${event.data.booking_id}`);
         } catch (error) {
             logger.error('Error handling booking-cancelled event:', error);
             throw error;
