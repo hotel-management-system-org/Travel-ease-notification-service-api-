@@ -38,9 +38,9 @@ export class KafkaClient {
             await this.consumer.connect();
             await this.producer.connect();
             this.isConnected = true;
-            logger.info('✅ Kafka Consumer & Producer Connected');
+            logger.info('Kafka Consumer & Producer Connected');
         } catch (error) {
-            logger.error('❌ Kafka Connection Failed:', error);
+            logger.error('Kafka Connection Failed:', error);
             throw error;
         }
     }
@@ -53,10 +53,10 @@ export class KafkaClient {
                     fromBeginning: true // 🔥 change here
                 });
 
-                logger.info(`📥 Subscribed to topic: ${topic}`);
+                logger.info(`Subscribed to topic: ${topic}`);
             }
         } catch (error) {
-            logger.error('❌ Kafka Subscription Failed:', error);
+            logger.error('Kafka Subscription Failed:', error);
             throw error;
         }
     }
@@ -76,7 +76,7 @@ export class KafkaClient {
                 },
             });
         } catch (error) {
-            logger.error('❌ Kafka Consumer Run Failed:', error);
+            logger.error('Kafka Consumer Run Failed:', error);
             throw error;
         }
     }
@@ -97,9 +97,9 @@ export class KafkaClient {
                     },
                 ],
             });
-            logger.warn(`⚠️ Message sent to DLQ from topic: ${originalTopic}`);
+            logger.warn(`Message sent to DLQ from topic: ${originalTopic}`);
         } catch (error) {
-            logger.error('❌ Failed to send message to DLQ:', error);
+            logger.error('Failed to send message to DLQ:', error);
         }
     }
 
