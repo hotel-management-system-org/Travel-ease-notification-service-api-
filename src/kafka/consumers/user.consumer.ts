@@ -23,15 +23,10 @@ export class UserConsumer{
 
         const kafkaEvent : SendUserOtp = JSON.parse(raw);
 
-        // ✅ DEBUG: Log the ACTUAL Kafka event structure
-        console.log("🔍 [UserConsumer] Raw Kafka Event:", JSON.stringify(kafkaEvent, null, 2));
-        console.log("🔍 [UserConsumer] eventType value:", kafkaEvent.event_type);
+        console.log("[UserConsumer] Raw Kafka Event:", JSON.stringify(kafkaEvent, null, 2));
+        console.log("[UserConsumer] eventType value:", kafkaEvent.event_type);
 
 
-       /* if(!kafkaEvent.data?.user_id || kafkaEvent.data?.email){
-            logger.error('❌ Invalid USER_REGISTERED payload', kafkaEvent);
-            return; // DLQ
-        }*/
 
         const event: SendUserOtp = {
             event_type: kafkaEvent.event_type || "OTP_SEND",
@@ -47,8 +42,7 @@ export class UserConsumer{
             version: ""
         }
 
-        // ✅ DEBUG: Log the mapped event
-        console.log("📤 [UserConsumer] Mapped Event:", JSON.stringify(event, null, 2));
+        console.log("[UserConsumer] Mapped Event:", JSON.stringify(event, null, 2));
 
         await this.handler.handleUserOtpSend(event);
 
