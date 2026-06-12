@@ -23,13 +23,13 @@ export class NotificationService {
 
 
     public async sendOtpNotification(emailPayload: EmailOtpPayload): Promise<void> {
-        console.log("📥 [sendNotification] Payload RECEIVED:", JSON.stringify(emailPayload, null, 2));
+        console.log("[sendNotification] Payload RECEIVED:", JSON.stringify(emailPayload, null, 2));
 
         await this.emailService.sendOtp(emailPayload);
     }
 
     public async handleBookingCreated(emailPayload: BookingCreatedEventSend): Promise<void> {
-        console.log("📥 [sendNotification] Payload RECEIVED:", JSON.stringify(emailPayload, null, 2));
+        console.log("[sendNotification] Payload RECEIVED:", JSON.stringify(emailPayload, null, 2));
 
         const notification = <NotificationPayload><unknown>{
             user_id: emailPayload.data.user_id,
@@ -45,7 +45,7 @@ export class NotificationService {
     }
 
     public async handleBookingConfirm(emailPayload: BookingConfirmedEventSend): Promise<void> {
-        console.log("📥 [sendNotification] Payload RECEIVED:", JSON.stringify(emailPayload, null, 2));
+        console.log("[sendNotification] Payload RECEIVED:", JSON.stringify(emailPayload, null, 2));
 
         const notification = <NotificationPayload><unknown>{
             user_id: emailPayload.data.user_id,
@@ -61,7 +61,7 @@ export class NotificationService {
     }
 
     public async handleBookingCancelled(emailPayload: BookingCancelledEventSend): Promise<void> {
-        console.log("📥 [sendNotification] Payload RECEIVED:", JSON.stringify(emailPayload, null, 2));
+        console.log("[sendNotification] Payload RECEIVED:", JSON.stringify(emailPayload, null, 2));
 
         const notification = <NotificationPayload><unknown>{
             user_id: emailPayload.data.user_id,
@@ -77,7 +77,7 @@ export class NotificationService {
     }
 
     public async handlePaymentSuccess(emailPayload: PaymentSuccessEventSend): Promise<void> {
-        console.log("📥 [sendNotification] Payload RECEIVED:", JSON.stringify(emailPayload, null, 2));
+        console.log("[sendNotification] Payload RECEIVED:", JSON.stringify(emailPayload, null, 2));
 
         const notification = <NotificationPayload><unknown>{
             user_id: emailPayload.data.user_id,
@@ -93,7 +93,7 @@ export class NotificationService {
     }
 
     public async handlePaymentFailed(emailPayload: PaymentFailedEventSend): Promise<void> {
-        console.log("📥 [sendNotification] Payload RECEIVED:", JSON.stringify(emailPayload, null, 2));
+        console.log("[sendNotification] Payload RECEIVED:", JSON.stringify(emailPayload, null, 2));
 
         const notification = <NotificationPayload><unknown>{
             user_id: emailPayload.data.user_id,
@@ -123,7 +123,7 @@ export class NotificationService {
 
         const notification = await this.notificationRepo.create(repoData);
 
-        console.log("✅ [sendNotification] Notification created with ID:", notification._id);
+        console.log("[sendNotification] Notification created with ID:", notification._id);
 
 
     }
