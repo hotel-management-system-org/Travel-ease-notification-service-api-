@@ -1,4 +1,4 @@
-import { Kafka, Consumer, Producer, EachMessagePayload, KafkaMessage } from 'kafkajs';
+import {Kafka, Consumer, Producer, EachMessagePayload, KafkaMessage, Admin} from 'kafkajs';
 import { logger } from '../utils/logger';
 import {kafkaConfig} from "../config/kafka.config";
 
@@ -7,6 +7,7 @@ export class KafkaClient {
     private kafka: Kafka;
     private consumer: Consumer;
     private producer: Producer;
+    private admin: Admin;
     private isConnected = false;
 
     private constructor() {
@@ -24,6 +25,7 @@ export class KafkaClient {
         });
 
         this.producer = this.kafka.producer();
+        this.admin = this.kafka.admin();
     }
 
     public static getInstance(): KafkaClient {
@@ -35,6 +37,7 @@ export class KafkaClient {
 
     public async connect(): Promise<void> {
         try {
+            await this.admin.connect();
             await this.consumer.connect();
             await this.producer.connect();
             this.isConnected = true;
@@ -47,10 +50,26 @@ export class KafkaClient {
 
     public async subscribe(topics: string[]): Promise<void> {
         try {
+
+            if (kafkaConfig.consumer.allowAutoTopicCreation) {
+                const existingTopics = await this.admin.listTopics();
+                const topicsToCreate = topics
+                    .filter(topic => !existingTopics.includes(topic))
+                    .map(topic => ({ topic, numPartitions: 1, replicationFactor: 1 }));
+
+                if (topicsToCreate.length > 0) {
+                    logger.info(`Creating missing topics in broker: ${topicsToCreate.map(t => t.topic).join(', ')}`);
+                    await this.admin.createTopics({
+                        topics: topicsToCreate,
+                        waitForLeaders: true
+                    });
+                }
+            }
+
             for (const topic of topics) {
                 await this.consumer.subscribe({
                     topic,
-                    fromBeginning: true // 🔥 change here
+                    fromBeginning: true
                 });
 
                 logger.info(`Subscribed to topic: ${topic}`);
@@ -83,6 +102,16 @@ export class KafkaClient {
 
     public async sendToDLQ(originalTopic: string, message: KafkaMessage): Promise<void> {
         try {
+
+            if (kafkaConfig.consumer.allowAutoTopicCreation) {
+                const existingTopics = await this.admin.listTopics();
+                if (!existingTopics.includes(kafkaConfig.topics.dlq)) {
+                    await this.admin.createTopics({
+                        topics: [{ topic: kafkaConfig.topics.dlq, numPartitions: 1 }]
+                    });
+                }
+            }
+
             await this.producer.send({
                 topic: kafkaConfig.topics.dlq,
                 messages: [
@@ -105,6 +134,7 @@ export class KafkaClient {
 
     public async disconnect(): Promise<void> {
         if (this.isConnected) {
+            await this.admin.disconnect();
             await this.consumer.disconnect();
             await this.producer.disconnect();
             this.isConnected = false;
