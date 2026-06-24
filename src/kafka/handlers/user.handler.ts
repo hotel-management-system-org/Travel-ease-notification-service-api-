@@ -24,13 +24,13 @@ export class UserHandler{
 
         const payload = {
             to: event.data.email,
-            firstName: event.data.firstName,
+            firstName: event.data.first_name,
             event_type:event.event_type,
             recipient:event.data.email,
             channel:'EMAIL',
             otp: event.data.otp,
             subject: 'Welcome! Please Verify Your Email',
-            message: `Dear ${event.data.firstName}, Welcome to Travel Ease`,
+            message: `Dear ${event.data.first_name}, Welcome to Travel Ease`,
             metadata: event.data,
         }
 
