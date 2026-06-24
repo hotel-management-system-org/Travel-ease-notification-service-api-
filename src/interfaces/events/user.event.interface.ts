@@ -7,7 +7,7 @@ export interface SendUserOtp extends BaseKafkaEvent {
         user_id: string;
         otp: number;
         email: string;
-        firstName: string;
-        lastName: string;
+        first_name: string;
+        last_name: string;
     };
 }
