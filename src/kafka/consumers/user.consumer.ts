@@ -17,35 +17,42 @@ export class UserConsumer{
         const raw = message.value?.toString();
 
         if(!raw){
-            logger.error('❌ Empty Kafka message');
+            logger.error('Empty Kafka message');
             return;
         }
 
-        const kafkaEvent : SendUserOtp = JSON.parse(raw);
-
-        console.log("[UserConsumer] Raw Kafka Event:", JSON.stringify(kafkaEvent, null, 2));
-        console.log("[UserConsumer] eventType value:", kafkaEvent.event_type);
+        try {
 
 
+            const kafkaEvent: SendUserOtp = JSON.parse(raw);
 
-        const event: SendUserOtp = {
-            event_type: kafkaEvent.event_type || "OTP_SEND",
-            data: {
-                user_id: kafkaEvent.data.user_id,
-                email: kafkaEvent.data.email,
-                firstName: kafkaEvent.data.firstName,
-                lastName: kafkaEvent.data.lastName,
-                otp: kafkaEvent.data.otp
-            },
-            event_id: "",
-            timestamp: "",
-            version: ""
+            if (!kafkaEvent.data || !kafkaEvent.data.email) {
+                logger.error('[UserConsumer] Invalid payload structure from Spring Boot');
+                return;
+            }
+
+
+            const event: SendUserOtp = {
+                event_type: kafkaEvent.event_type || "OTP_SEND",
+                data: {
+                    user_id: kafkaEvent.data.user_id,
+                    email: kafkaEvent.data.email,
+                    first_name: kafkaEvent.data.first_name,
+                    last_name: kafkaEvent.data.last_name,
+                    otp: kafkaEvent.data.otp
+                },
+                event_id: "",
+                timestamp: "",
+                version: ""
+            }
+
+            console.log("[UserConsumer] Mapped Event:", JSON.stringify(event, null, 2));
+
+            await this.handler.handleUserOtpSend(event);
+
+        }catch(error) {
+            logger.error('[UserConsumer] Error parsing Spring Boot Kafka message:', error);
         }
-
-        console.log("[UserConsumer] Mapped Event:", JSON.stringify(event, null, 2));
-
-        await this.handler.handleUserOtpSend(event);
-
     }
 
 
