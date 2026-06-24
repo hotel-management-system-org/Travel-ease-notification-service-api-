@@ -4,14 +4,12 @@ import { kafkaClient } from './kafka/kafka.client';
 import { UserConsumer } from './kafka/consumers/user.consumer';
 import { logger } from './utils/logger';
 import { EachMessagePayload } from 'kafkajs';
-import {databaseConfig} from "./config/database.config";
 import {kafkaConfig} from "./config/kafka.config";
 import {BookingConsumer} from "./kafka/consumers/booking.consumer";
 import {PaymentConsumer} from "./kafka/consumers/payment.consumer";
 
 async function startServer() {
     try {
-        await databaseConfig.connect();
         await kafkaClient.connect();
 
         const topics = [
@@ -74,7 +72,6 @@ async function startServer() {
         process.on('SIGTERM', async () => {
             logger.info('SIGTERM received, shutting down gracefully...');
             await kafkaClient.disconnect();
-            await databaseConfig.disconnect();
             process.exit(0);
         });
 
