@@ -4,9 +4,9 @@ export const kafkaConfig = {
     groupId: process.env.KAFKA_GROUP_ID || 'notification-service-group',
 
     consumer: {
-        sessionTimeout: parseInt(process.env.KAFKA_CONSUMER_SESSION_TIMEOUT || '3000',10),
-        heartbeatInterval: parseInt(process.env.KAFKA_CONSUMER_HEARTBEAT_INTERVAL || '3000',10),
-        allowAutoTopicCreation: false,
+        sessionTimeout: parseInt(process.env.KAFKA_CONSUMER_SESSION_TIMEOUT || '30000',10),
+        heartbeatInterval: parseInt(process.env.KAFKA_CONSUMER_HEARTBEAT_INTERVAL || '10000',10),
+        allowAutoTopicCreation: true,
         retry: {
             initialRetryTime: 100,
             retries: 8,
